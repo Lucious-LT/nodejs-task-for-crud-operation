@@ -50,6 +50,32 @@ npm run dev
 #Run Tests
 npm test 
 
+## 📁 Project Folder Structure
+
+├── config
+│ └── db.js
+├── controllers
+│ └── task.controller.js
+├── middleware
+│ └── auth.middleware.js
+├── model
+│ ├── task.model.js
+│ └── user.model.js
+├── node_modules
+├── routes
+│ ├── auth.routes.js
+│ └── task.routes.js
+├── test
+│ ├── auth.test.js
+│ └── task.test.js
+├── .env
+├── .env.test
+├── app.js
+├── babel.config.js
+├── package.json
+├── package-lock.json
+├── README.md
+└── server.js
 
 
 
