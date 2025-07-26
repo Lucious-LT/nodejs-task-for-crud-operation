@@ -4,8 +4,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
 
+
 export const signup = async (req, res) => {
   try {
+    // console.log("REQ BODY:", req.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -25,9 +27,12 @@ export const signup = async (req, res) => {
 
     res.status(201).json({ message: "User created" });
   } catch (error) {
+    console.error("Signup error:", error);
+
     res.status(500).json({ message: "Internal server error" });
   }
 };
+  
 
 
 export const login = async (req, res) => {
