@@ -1,5 +1,4 @@
-// task.test.js
-// ✅ Set environment vars BEFORE imports
+
 process.env.NODE_ENV = "test";
 process.env.JWT_SECRET = "testsecret";
 
@@ -18,15 +17,15 @@ beforeAll(async () => {
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
 
-  // Create test user "lucious"
+  // Create test user "testuser@example.com"
   await request(app).post("/api/auth/signup").send({
-    username: "lucious",
+    email: "testuser@example.com",
     password: "securepassword123",
   });
 
   // Login to get token
   const loginRes = await request(app).post("/api/auth/login").send({
-    username: "lucious",
+    email: "testuser@example.com",
     password: "securepassword123",
   });
 
