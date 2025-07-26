@@ -70,3 +70,5 @@ describe("Auth Routes", () => {
     expect(res.body.message).toBe("Invalid credentials");
   });
 });
+
+
