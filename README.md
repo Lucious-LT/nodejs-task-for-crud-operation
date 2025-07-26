@@ -4,7 +4,7 @@ A simple task management API built with Node.js, Express, MongoDB, and JWT for u
 
 ---
 
-## 🚀 Features
+##  Features
 
 - ✅ User Signup & Login (JWT-based authentication)
 - 🔐 Protected task routes
@@ -43,7 +43,14 @@ cd nodejs-task-for-crud-operation
 # Install dependencies
 npm install
 
+#To Run it Locally
+npm run dev
+
+
 #Run Tests
-npm test
+npm test 
+
+
+
 
 
