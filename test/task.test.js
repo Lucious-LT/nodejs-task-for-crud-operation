@@ -29,7 +29,7 @@ beforeAll(async () => {
     password: "securepassword123",
   });
 
-  token = loginRes.body.token; // Make sure your login route returns { token: "..." }
+  token = loginRes.body.token; 
 });
 
 afterEach(async () => {
@@ -43,7 +43,11 @@ afterAll(async () => {
 
 describe("GET /tasks", () => {
   it("should return all tasks", async () => {
-    await Task.create({ title: "Test Task", completed: "pending" });
+    await Task.create({
+      title: "Test Task",
+      description: "Finish writing the REST API POST",
+      status: "pending",
+    });
 
     const res = await request(app)
       .get("/api/tasks")
@@ -61,10 +65,14 @@ describe("POST /api/tasks", () => {
     const res = await request(app)
       .post("/api/tasks")
       .set("Authorization", `Bearer ${token}`)
-      .send({ title: "New Task", completed: "pending" });
+      .send({
+        title: "Find me",
+        description: "Finish writing the REST API POST",
+        status: "pending",
+      });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body).toHaveProperty("title", "New Task");
+    expect(res.body).toHaveProperty("title", "Find me");
      expect(res.body).toHaveProperty("status", "pending");
   });
 });
@@ -74,7 +82,7 @@ describe("GET /api/tasks/:id", () => {
     const created = await request(app)
       .post("/api/tasks")
       .set("Authorization", `Bearer ${token}`)
-      .send({ title: "Find me", completed: "pending" });
+      .send({ title: "Find me", description: "Finish writing the REST API POST", status: "pending" });
 
     const taskId = created.body._id;
 
@@ -84,5 +92,49 @@ describe("GET /api/tasks/:id", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("title", "Find me");
+  });
+});
+
+describe("UPDATE /api/tasks/:id", () => {
+  it("should return task by ID", async () => {
+    const created = await request(app)
+      .post("/api/tasks")
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        title: "Find me",
+        description: "Finish writing the REST API POST",
+        status: "pending"
+      });
+
+    const taskId = created.body._id;
+
+    const res = await request(app)
+      .get(`/api/tasks/${taskId}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("title", "Find me");
+  });
+});
+
+describe("DELETE /api/tasks/:id", () => {
+  it("should return task by ID", async () => {
+    const created = await request(app)
+      .post("/api/tasks")
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        title: "Find me",
+        status: "pending"
+      });
+
+    const taskId = created.body._id;
+
+    const res = await request(app)
+      .get(`/api/tasks/${taskId}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("title", "Find me");
+    
   });
 });
