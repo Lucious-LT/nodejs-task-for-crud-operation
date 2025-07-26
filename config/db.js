@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const connectDB = async () => {
+  if (process.env.NODE_ENV === "test") return; // ⛔ Don't connect in test mode
+
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("✅ MongoDB connected");
@@ -14,5 +13,3 @@ const connectDB = async () => {
 };
 
 export default connectDB;
-
-//mongodb+srv://luciousudemezue:silpbrejiN9HEYgh@cluster0.dvgblpx.mongodb.net/

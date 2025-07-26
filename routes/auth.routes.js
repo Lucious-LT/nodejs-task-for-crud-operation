@@ -39,36 +39,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-// router.post("/login", async (req, res) => {
-//   const { username, password } = req.body;
-//   console.log("🔐 Login attempt with:", username);
-
-//   const user = await User.findOne({ username });
-
-//   if (!user) {
-//     console.log("❌ User not found");
-//     return res.status(400).json({ message: "Invalid credentials" });
-//   }
-
-//   console.log("✅ User found:", user.username);
-//   console.log("👉 Plain password:", password);
-//   console.log("🔒 Hashed password in DB:", user.password);
-
-//   const isMatch = await bcrypt.compare(password, user.password);
-
-//   if (!isMatch) {
-//     console.log("❌ Password did not match");
-//     return res.status(400).json({ message: "Invalid credentials" });
-//   }
-
-//   console.log("✅ Password matched");
-
-//   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-//     expiresIn: "1h",
-//   });
-
-//   res.json({ token });
-// });
-
 export default router;

@@ -9,6 +9,7 @@ const app = express();
 
 connectDB(); // connect to MongoDB
 
+
 app.use(express.json());
 app.use("/api/tasks", taskRoutes); // ⬅️ So `router.get("/")` becomes `/api/tasks`
 app.use("/api/auth", authRoutes); 

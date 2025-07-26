@@ -1,4 +1,6 @@
 import express from "express";
+import { auth } from "../middleware/auth.middleware.js";
+
 
 import {
   getAllTasks,
@@ -10,10 +12,12 @@ import {
 
 const router = express.Router();
 
+
+
 router.get("/", getAllTasks);
 router.get("/:id", getTaskById);
-router.post("/", createTask);
-router.patch("/:id", updateTask);
-router.delete("/:id", deleteTask);
+router.post("/", auth, createTask);
+router.patch("/:id", auth, updateTask);
+router.delete("/:id", auth, deleteTask);
 
 export default router;
